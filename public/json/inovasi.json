@@ -1,0 +1,45 @@
+[
+  {
+    "id": 1,
+    "nama": "Anti Banting",
+    "deskripsi": "Antusias Tilik Bantu dan Pencegahan Anak Stunting",
+    "lembaga": "UPT PUSKESMAS ANAK SETATAH KECAMATAN RANGSANG BARAT",
+    "file": "anti_banting.pdf"
+  },
+  {
+    "id": 2,
+    "nama": "Gunting Kado",
+    "deskripsi": "Cegah Stunting Denga Kado",
+    "lembaga": "UPT PUSKESMAS PULAU MERBAU",
+    "file": "gunting_kado.pdf"
+  },
+  {
+    "id": 3,
+    "nama": "Pungguk Centing",
+    "deskripsi": "Penuh Gizi Untuk Cegah Stunting",
+    "lembaga": "UPT PUSKESMAS TANJUNG SAMAK",
+    "file": "pungguk_centing.pdf"
+  },
+  {
+    "id": 4,
+    "nama": "Kepiting",
+    "deskripsi": "Kelompok Peduli Stunting",
+    "lembaga": "UPT Puskesmas Kedabu Rapat Kec. Ransang Pesisir",
+    "file": "kepiting.pdf"
+  },
+  {
+    "id": 5,
+    "nama": "KUPAS",
+    "deskripsi": "Kelompok Untuk Pemantau Anak Stunting",
+    "lembaga": "UPT Puskesmas Anak Setatah",
+    "file": "kupas.pdf"
+  },
+  {
+    "id": 6,
+    "nama": "SAGITA",
+    "deskripsi": "Sahabat Gizi Kita",
+    "lembaga": "UPT Puskesmas Alahair",
+    "file": "sagita.pdf"
+  }
+
+]
