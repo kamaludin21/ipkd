@@ -12,8 +12,7 @@ class DocumentParentController extends Controller
     {
       $parentDocument = DocumentParent::all();
       $parentDocumentData = DocumentParent::all()->first();
-      $document = Document::where('document_parent_id', $parentDocumentData->id)->get();
-
+      $document = Document::where('document_parent_id', $parentDocumentData->id ?? 0)->get() ?? 0;
 
       return view('dokumen.index', [
         'parentDocument' => $parentDocument,
@@ -28,11 +27,19 @@ class DocumentParentController extends Controller
       $parentDocumentData = DocumentParent::where("slug", $parent)->first();
       $document = Document::where('document_parent_id', $parentDocumentData->id)->get();
 
-      // return $parentDocumentData->id;
-
       return view('dokumen.index', [
         'parentDocument' => $parentDocument,
         'parentDocumentData' => $parentDocumentData,
+        'document' => $document
+      ]);
+    }
+
+    public function document($slug)
+    {
+      $parentDocument = DocumentParent::all();
+      $document = Document::where('slug', $slug)->first();
+      return view('dokumen.detail', [
+        'parentDocument' => $parentDocument,
         'document' => $document
       ]);
     }

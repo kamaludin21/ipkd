@@ -8,11 +8,6 @@ use App\Http\Controllers\InovasiController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\LiputanController;
 use App\Http\Controllers\VideoController;
-use App\Models\Artikel;
-use App\Models\Infographic;
-use App\Models\Inovasi;
-use App\Models\Liputan;
-use App\Models\Video;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::controller(DocumentParentController::class)->group(function () {
   Route::get('/dokumen', 'index')->name('dokumen.index');
   Route::get('/dokumen/{parent}', 'parent')->name('dokumen.parent');
+  Route::get('/dokumen/detail/{slug}', 'document')->name('dokumen.detail');
 });
 
 Route::controller(LandingPageController::class)->group(function () {
@@ -41,7 +37,6 @@ Route::controller(LandingPageController::class)->group(function () {
   Route::get('data-stunting/program-pemerintah', 'inovasi')->name('data-stunting.inovasi');
   Route::get('data-stunting/program-pemerintah/download/{id}', 'download')->name('data-stunting.inovasi.download');
 });
-
 
 // Administrator
 Route::middleware(['auth'])->prefix('admin')->group(function () {

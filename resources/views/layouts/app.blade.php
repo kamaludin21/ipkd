@@ -67,7 +67,9 @@
 
       </div>
     </nav>
-    @yield('content')
+    <div class="pt-10 pb-20">
+      @yield('content')
+    </div>
     <footer
       class="px-2 md:px-5 lg:px-28 w-full py-10 flex flex-col md:flex-row justify-between bg-white border-t-4 border-blue-600">
       <div class="w-full md:w-1/3 ">
