@@ -136,7 +136,7 @@ class AdminDokumenController extends Controller
 
 		if ($request->file('file')) {
 			if (Storage::exists($document->file)) {
-				unlink(public_path('..\storage\app\public\dokumen_negara_2023_copy.pdf'));
+				unlink(public_path('../storage/app/public/'.$document->file));
 			}
 			$get_ext = $request->file('file')->extension();
 			$file_name = Str::random(6) . cleanFileName($request->name) . '.' . $get_ext;
