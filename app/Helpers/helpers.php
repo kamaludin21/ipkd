@@ -1,8 +1,10 @@
 <?php
 
+use App\Models\Document;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
-if(!function_exists('cleanFileName')) {
+if (!function_exists('cleanFileName')) {
   function cleanFileName($string)
   {
     // Replaces all spaces with hyphens.
@@ -18,11 +20,20 @@ if(!function_exists('cleanFileName')) {
   }
 }
 
-if(!function_exists('currentRoutePosition')) {
+if (!function_exists('currentRoutePosition')) {
   function currentRoutePosition()
   {
     $routeName = Route::currentRouteName();
-    $cleanRouteName = explode(".",$routeName);
+    $cleanRouteName = explode(".", $routeName);
     return $cleanRouteName[0];
+  }
+}
+
+if (!function_exists('duplicate_find')) {
+  function duplicate_find($value, $column = 'slug'): bool
+  {
+    $query = Document::where($column, $value)->count();
+    return ($query > 1) ? true : false;
+
   }
 }
