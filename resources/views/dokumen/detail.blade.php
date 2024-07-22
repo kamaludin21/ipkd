@@ -17,12 +17,13 @@
         <p class="text-lg font-medium whitespace-break-spaces">{{ $document->description ?? '-'}}</p>
       </div>
       <div>
-        <p class="text-base font-light">Dibuat pada</p>
-        <p class="text-lg font-medium">{{ $document->created_at ?? '-'}}</p>
+        <p class="text-base font-light">Tahun</p>
+        <p class="text-lg font-medium whitespace-break-spaces">{{ $document->parent->name ?? '-'}}</p>
       </div>
+
       <div>
-        <p class="text-base font-light">Terakhir diperbarui</p>
-        <p class="text-lg font-medium">{{ $document->updated_at ?? '-'}}</p>
+        <p class="text-base font-light">Dibuat pada</p>
+        <p class="text-lg font-medium">{{ \Illuminate\Support\Carbon::parse($document->created_at)->isoFormat("D MMMM Y") }}</p>
       </div>
     </div>
     <div class="bg-white border p-4 rounded-lg flex-1 space-y-4">
