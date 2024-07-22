@@ -18,7 +18,7 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     @foreach ($document as $item)
     <div class="bg-white border p-4 rounded-lg">
-      <p class="text-xl font-semibold">{{ $item->name }}</p>
+      <p class="text-xl font-semibold line-clamp-1">{{ $item->name }}</p>
       <p class="text-sm">{{ $item->description }}</p>
       <div class="space-x-2 mt-2">
         <a href="{{ Storage::disk('local')->url($item->file) }}"
