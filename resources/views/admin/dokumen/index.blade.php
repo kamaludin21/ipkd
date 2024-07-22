@@ -22,13 +22,13 @@
   @endif
   <div class="w-full items-center flex flex-col md:flex-row justify-between">
     <div class=" order-2 md:order-1 flex space-x-2 w-full md:w-2/5">
-      @if(request()->routeIs('inovasi.search'))
-      <a href="{{ route('inovasi.index') }}"
+      @if(request()->routeIs('admin.document.search'))
+      <a href="{{ route('admin.document.index') }}"
         class="bg-gray-100 hover:bg-blue-600 rounded-lg px-2 flex items-center text-gray-600 hover:text-white">
         @include('components.icons.bulb')
       </a>
       @endif
-      <form action="{{ route('inovasi.search') }}" method="post" class="flex w-full space-x-2 bg-white rounded-lg">
+      <form action="{{ route('admin.document.search') }}" method="post" class="flex w-full space-x-2 bg-white rounded-lg">
         @csrf
         <input type="search" value="{{ $searching ?? '' }}" name="searching" placeholder="Pencarian"
           class="w-full focus:outline-none py-2 pl-2 bg-transparent">
@@ -48,7 +48,7 @@
       <thead>
         <tr class="border-b text-sm uppercase font-bold">
           <td class="p-4">No.</td>
-          <td class="p-4">Parent</td>
+          <td class="p-4">Tahun</td>
           <td class="p-4">Nama</td>
           <td class="p-4">Deskripsi</td>
           <td class="p-4 w-20">File</td>
@@ -72,11 +72,11 @@
           <td class="p-4 text-start">
             <p class="font-medium text-lg">{{ $item->parent->name }}</p>
           </td>
-          <td class="p-4 text-start">
+          <td class="p-4 text-start {{ duplicate_find($item->slug) ? 'bg-red-100' : 'bg-transparent' }}">
             <p class="font-medium text-lg">{{ $item->name }}</p>
           </td>
           <td class="p-4 text-start">
-            <p class="">{{ $item->description }}</p>
+            <p class="">{{ Str::limit(strip_tags($item->description), 50, '...') }}</p>
           </td>
           <td class="p-4">
             <a href="{{ route('admin.document.download', $item->id) }}"
@@ -138,10 +138,15 @@
           class="w-full px-2 py-2 rounded ring-gray-300 focus:ring-2 focus:ring-blue-400 outline-none ring-1">
       </div>
       <div class="space-y-1">
-        <label for="" class="text-sm font-medium">File <span class="text-red-400 font-medium text-xs">(Type:PDF,Max:
+        <label for="" class="text-sm font-medium">Tanggal</label>
+        <input name="description" type="date"
+          class="w-full px-2 py-2 rounded ring-gray-300 focus:ring-2 focus:ring-blue-400 outline-none ring-1">
+      </div>
+      <div class="space-y-1">
+        <label for="" class="text-sm font-medium">File <span class="text-red-400 font-medium text-xs">(Type:PDF, Max-Size:
             5MB)</span></label>
         <input name="file" type="file"
-          class="w-full px-2 py-2 rounded ring-gray-300 focus:ring-2 focus:ring-blue-400 outline-none ring-1" required>
+          class="w-full px-2 py-2 rounded ring-gray-300 focus:ring-2 focus:ring-blue-400 outline-none ring-1" accept=".pdf" required>
       </div>
       <div class="pt-2 flex justify-end">
         <button type="submit" role="button" class="px-3 py-2 bg-blue-600 text-white rounded">Submit</button>
