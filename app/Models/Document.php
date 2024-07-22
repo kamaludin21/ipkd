@@ -16,8 +16,11 @@ class Document extends Model
       'slug',
       'name',
       'file',
-      'description'
+      'description',
+      'created_at'
     ];
+
+    protected $casts = ['created_at' => 'datetime'];
 
     public function parent()
     {
