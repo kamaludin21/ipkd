@@ -15,7 +15,7 @@ class AdminDokumenController extends Controller
 {
 	public function indexDocumentParent()
 	{
-		$documentParent = DocumentParent::orderBy("created_at", "desc")->paginate(5);
+		$documentParent = DocumentParent::orderBy("created_at", "desc")->paginate(10);
 		return view('admin.parentdocument.index', ['documentParent' => $documentParent]);
 	}
 
@@ -31,7 +31,7 @@ class AdminDokumenController extends Controller
 			'description' => $request->description,
 		]);
 
-		return redirect()->route('admin.parentdocument.index')->with('success', 'Berhasil menyimpan data parent dokumen');
+		return redirect()->route('admin.parentdocument.index')->with('success', 'Berhasil menyimpan data tahun');
 	}
 
 	public function editDocumentParent($id)
@@ -52,14 +52,14 @@ class AdminDokumenController extends Controller
 		$documentParent->description = $request->description;
 
 		$documentParent->save();
-		return redirect()->route('admin.parentdocument.index')->with('success', 'Berhasil mengubah data parent dokumen');
+		return redirect()->route('admin.parentdocument.index')->with('success', 'Berhasil mengubah data tahun');
 	}
 
 	function destroyDocumentParent($id)
 	{
 		$documentParent = DocumentParent::findOrFail($id);
 		$documentParent->delete();
-		return redirect()->route('admin.parentdocument.index')->with('success', 'Berhasil menghapus data parent dokumen');
+		return redirect()->route('admin.parentdocument.index')->with('success', 'Berhasil menghapus data tahun');
 	}
 
 	function searchDocumentParent(Request $request)
@@ -67,7 +67,7 @@ class AdminDokumenController extends Controller
 		$searching = $request->searching;
 		$documentParent = DocumentParent::where('name', 'ILIKE', '%' . $searching . '%')
 			->orWhere('description', 'ILIKE', '%' . $searching . '%')
-			->paginate();
+			->paginate(10);
 
 		return view('admin.parentdocument.index', [
 			'documentParent' => $documentParent,
@@ -79,7 +79,7 @@ class AdminDokumenController extends Controller
 	public function indexDocument()
 	{
 		$parentDocument = DocumentParent::all();
-		$document = Document::orderBy("created_at", "desc")->paginate(5);
+		$document = Document::orderBy("created_at", "desc")->paginate(10);
 		return view('admin.dokumen.index', [
 			'document' => $document,
 			'parentDocument' => $parentDocument
@@ -90,22 +90,24 @@ class AdminDokumenController extends Controller
 	{
 		$request->validate([
 			'document_parent_id' => 'required',
-			'name' => 'required',
-			'file' => 'required|mimetypes:application/pdf|min:10|max:5000'
+			'name' => 'required|unique:documents,name',
+			'file' => 'required|mimetypes:application/pdf|min:10|max:5000',
+      'created_at' => 'required'
 		]);
 
 		if ($request->file('file')) {
 			$get_ext = $request->file('file')->extension();
-			$file_name = cleanFileName($request->name) . '.' . $get_ext;
+			$file_name = Str::random(10).'-'.cleanFileName($request->name). '.' . $get_ext;
 			Storage::disk('public')->putFileAs($request->file('file'), $file_name);
 		}
 
 		Document::create([
 			'document_parent_id' => $request->document_parent_id,
-			'slug' => Str::of($request->name)->slug('-'),
+			'slug' => Str::of($request->name)->slug('-').'-'.Str::random(10),
 			'name' => $request->name,
 			'file' => $file_name,
 			'description' => $request->description,
+      'created_at' => $request->created_at
 		]);
 
 		return redirect()->route('admin.document.index')->with('success', 'Berhasil menyimpan data dokumen');
@@ -127,12 +129,15 @@ class AdminDokumenController extends Controller
 		$request->validate([
 			'document_parent_id' => 'required',
 			'name' => 'required',
-			'file' => 'mimetypes:application/pdf|min:10|max:5000'
+			'file' => 'mimetypes:application/pdf|min:10|max:5000',
+      'created_at' => 'required'
 		]);
 
 		$document = Document::findOrFail($id);
 		$document->name = $request->name;
+    $document->slug = Str::of($request->name)->slug('-').'-'.Str::random(10);
 		$document->description = $request->description;
+    $document->created_at = $request->created_at;
 
 		if ($request->file('file')) {
 			if (Storage::exists($document->file)) {
@@ -158,12 +163,14 @@ class AdminDokumenController extends Controller
 	public function searchDocument(Request $request)
 	{
 		$searching = $request->searching;
+    $parentDocument = DocumentParent::all();
 		$document = Document::where('name', 'ILIKE', '%' . $searching . '%')
 			->orWhere('description', 'ILIKE', '%' . $searching . '%')
-			->paginate();
+			->paginate(10);
 
 		return view('admin.dokumen.index', [
 			'document' => $document,
+      'parentDocument' => $parentDocument,
 			'searching' => $request->searching
 		]);
 	}
