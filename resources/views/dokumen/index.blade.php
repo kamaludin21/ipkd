@@ -13,7 +13,7 @@
 </tr>
 @endunless
 <div class="p-2 md:px-5 lg:px-28 py-10 pb-2 w-full overflow-x-auto whitespace-nowrap">
-  <p class="text-3xl py-4 font-semibold">{{ $parentDocumentData->name ?? ''}}</p>
+  <p class="text-3xl py-4 font-semibold">Tahun {{ $parentDocumentData->name ?? ''}}</p>
   <hr class="mb-4">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     @foreach ($document as $item)
