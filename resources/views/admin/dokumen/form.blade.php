@@ -37,7 +37,7 @@
         @csrf
         @method('PATCH')
         <div class="space-y-1">
-          <label for="" class="text-sm font-medium">Parent Dokumen</label>
+          <label for="" class="text-sm font-medium">Tahun Dokumen</label>
           <select name="document_parent_id" id=""
             class="w-full px-2 py-2 rounded ring-gray-300 focus:ring-2 focus:ring-blue-400 outline-none ring-1 capitalize"
             required>
@@ -59,10 +59,16 @@
             class="w-full px-2 py-2 rounded ring-gray-300 focus:ring-2 focus:ring-blue-400 outline-none ring-1">
         </div>
         <div class="space-y-1">
-          <label for="" class="text-sm font-medium">File <span class="text-red-400 font-medium text-xs">(Type:PDF,Max:
+          {{--  value="{{ $document->created_at }}" --}}
+          <label for="" class="text-sm font-medium">Tanggal</label>
+          <input name="created_at" type="date" value="{{ \Illuminate\Support\Carbon::parse($document->created_at)->format("Y-m-d") }}"
+            class="w-full px-2 py-2 rounded ring-gray-300 focus:ring-2 focus:ring-blue-400 outline-none ring-1">
+        </div>
+        <div class="space-y-1">
+          <label for="" class="text-sm font-medium">File <span class="text-red-400 font-medium text-xs">(Type:PDF, Max-Size:
               5MB)</span></label>
           <input name="file" type="file" value="{{ $document->file }}"
-            class="w-full px-2 py-2 rounded ring-gray-300 focus:ring-2 focus:ring-blue-400 outline-none ring-1">
+            class="w-full px-2 py-2 rounded ring-gray-300 focus:ring-2 focus:ring-blue-400 outline-none ring-1" accept=".pdf">
         </div>
         <div class="pt-2 flex justify-end">
           <button type="submit" role="button" class="px-3 py-2 bg-blue-600 text-white rounded">Submit</button>
