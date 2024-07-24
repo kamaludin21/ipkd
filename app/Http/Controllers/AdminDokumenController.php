@@ -129,7 +129,7 @@ class AdminDokumenController extends Controller
 		$request->validate([
 			'document_parent_id' => 'required',
 			'name' => 'required',
-			'file' => 'mimetypes:application/pdf|min:10|max:5000',
+			'file' => 'mimetypes:application/pdf',
       'created_at' => 'required'
 		]);
 
@@ -178,6 +178,6 @@ class AdminDokumenController extends Controller
 	public function downloadDocument($id)
 	{
 		$document = Document::findOrFail($id);
-		return Storage::download($document->file, $document->file);
+		return Storage::disk('local')->download($document->file, $document->file);
 	}
 }
