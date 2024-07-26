@@ -91,7 +91,7 @@ class AdminDokumenController extends Controller
 		$request->validate([
 			'document_parent_id' => 'required',
 			'name' => 'required|unique:documents,name',
-			'file' => 'required|mimetypes:application/pdf|min:10|max:5000',
+			'file' => 'required|mimetypes:application/pdf|min:10|max:20000',
       'created_at' => 'required'
 		]);
 
