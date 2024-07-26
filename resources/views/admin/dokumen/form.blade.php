@@ -66,7 +66,7 @@
         </div>
         <div class="space-y-1">
           <label for="" class="text-sm font-medium">File <span class="text-red-400 font-medium text-xs">(Type:PDF, Max-Size:
-              5MB)</span></label>
+              20MB)</span></label>
           <input name="file" type="file" value="{{ $document->file }}"
             class="w-full px-2 py-2 rounded ring-gray-300 focus:ring-2 focus:ring-blue-400 outline-none ring-1" accept=".pdf">
         </div>
