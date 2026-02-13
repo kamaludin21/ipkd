@@ -5,12 +5,16 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: ipkd-app
     restart: always
+    volumes:
+      - .:/var/www
     networks:
       - web
 
   nginx:
     image: nginx:alpine
+    container_name: ipkd-nginx
     restart: always
     volumes:
       - .:/var/www
@@ -21,8 +25,8 @@ services:
       - app
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.project1.rule=Host(`ipkd.domain.com`)"
-      - "traefik.http.services.project1.loadbalancer.server.port=80"
+      - "traefik.http.routers.ipkd.rule=Host(`ipkd.merantikab.go.id`)"
+      - "traefik.http.services.ipkd.loadbalancer.server.port=80"
 
 networks:
   web:
