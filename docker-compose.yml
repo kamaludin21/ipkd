@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    networks:
+      - web
+
+  nginx:
+    image: nginx:alpine
+    restart: always
+    volumes:
+      - .:/var/www
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - web
+    depends_on:
+      - app
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.project1.rule=Host(`ipkd.domain.com`)"
+      - "traefik.http.services.project1.loadbalancer.server.port=80"
+
+networks:
+  web:
+    external: true
