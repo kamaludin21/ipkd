@@ -14,8 +14,6 @@ WORKDIR /var/www
 # COPY SEMUA SOURCE KE IMAGE
 COPY . /var/www
 
-# Install dependency
-RUN composer install --no-dev --optimize-autoloader
 
 # Permission
 RUN chown -R www-data:www-data /var/www
