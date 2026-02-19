@@ -31,10 +31,10 @@ WORKDIR /var/www
 COPY . .
 
 # Install dependencies
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+#RUN composer install --no-dev --optimize-autoloader --no-interaction
 
 # Fix permission
-RUN chown -R www-data:www-data storage bootstrap/cache
+#RUN chown -R www-data:www-data storage bootstrap/cache
 
 EXPOSE 9000
 
