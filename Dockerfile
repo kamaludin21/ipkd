@@ -22,6 +22,7 @@ RUN docker-php-ext-install \
     gd \
     zip \
     intl
+RUN docker-php-ext-install pdo pdo_pgsql pgsql
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
