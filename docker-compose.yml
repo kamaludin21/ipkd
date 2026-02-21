@@ -9,6 +9,8 @@ services:
     restart: always
     volumes:
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+     expose:
+      - "9000"
     networks:
       - web
 
@@ -19,15 +21,12 @@ services:
     volumes:
       - .:/var/www
       - ./docker/nginx:/etc/nginx/conf.d
+    ports:
+      - "8081:80"
     networks:
       - web
     depends_on:
       - app
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.ipkd.rule=Host(`ipkd.merantikab.go.id`)"
-      - "traefik.http.services.ipkd.loadbalancer.server.port=80"
-
 networks:
   web:
     external: true
