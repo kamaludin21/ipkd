@@ -8,7 +8,7 @@ services:
     container_name: ipkd-app
     restart: always
     volumes:
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - .:/var/www
     expose:
       - "9000"
     networks:
@@ -27,6 +27,7 @@ services:
       - web
     depends_on:
       - app
+
 networks:
   web:
     external: true
