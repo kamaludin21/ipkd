@@ -1,16 +1,21 @@
 {
   "public/fonts/quicksand/Quicksand-Regular.ttf": {
-    "file": "assets/Quicksand-Regular-05e22f1a.ttf",
+    "file": "assets/Quicksand-Regular-C79VFe_I.ttf",
     "src": "public/fonts/quicksand/Quicksand-Regular.ttf"
   },
   "resources/css/app.css": {
-    "file": "assets/app-e04bea65.css",
+    "file": "assets/app-Bp2z_93A.css",
+    "src": "resources/css/app.css",
     "isEntry": true,
-    "src": "resources/css/app.css"
+    "name": "app",
+    "names": [
+      "app.css"
+    ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-bd643c04.js",
-    "isEntry": true,
-    "src": "resources/js/app.js"
+    "file": "assets/app-DcRZm79u.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
   }
 }
