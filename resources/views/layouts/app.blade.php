@@ -18,10 +18,10 @@
   @vite('resources/css/app.css')
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link http-equiv="Content-Security-Policy" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
     rel="stylesheet">
   <!-- Google tag (gtag.js) -->
-  <script http-equiv="Content-Security-Policy" async src="https://www.googletagmanager.com/gtag/js?id=G-7YGVXFGFLC"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7YGVXFGFLC"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
 
